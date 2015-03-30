@@ -12,10 +12,8 @@ namespace Manhattan
         {
             // Web API configuration and services
 
-            // Return JSON instead of XML
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(
-                new MediaTypeHeaderValue("text/html")
-            );
+            // Remove XML formatter
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
