@@ -2,39 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Manhattan.Controllers
 {
-    [Authorize]
-    public class ValuesController : ApiController
+    public class ContinentsController : ApiController
     {
-        // GET api/values
+        // GET api/continents
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Europe", "Asia" };
         }
 
-        // GET api/values/5
+        // Get api/continents/ID
         public string Get(int id)
         {
-            return "value";
+            return "Europe";
         }
 
-        // POST api/values
+        // POST api/continents
         public void Post([FromBody]string value)
         {
+            // TODO
         }
 
-        // PUT api/values/5
+        // PUT api/continents/ID
         public void Put(int id, [FromBody]string value)
         {
+            // TODO Insert new
         }
 
-        // DELETE api/values/5
+        // DELETE api/continents/ID
         public void Delete(int id)
         {
+            // TODO detele
         }
     }
 }
