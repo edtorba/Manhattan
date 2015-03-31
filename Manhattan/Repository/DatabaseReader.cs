@@ -13,8 +13,6 @@ namespace Manhattan.Repository
         private static string _ConnectionString = WebConfigurationManager
                                                     .ConnectionStrings["SOFT338_ConnectionString"]
                                                     .ConnectionString;
-        // Etablish a new connection using connection string in the web.config
-        private static SqlConnection connection = new SqlConnection(_ConnectionString);
 
         /**
          * Retrieve list of all continents
@@ -26,14 +24,20 @@ namespace Manhattan.Repository
             // Create a new list to store continents
             List<Continent> continents = new List<Continent>();
 
-            // SQL object that stores our SQL query
+            // Etablish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
 
-            //SELECT
-            //    ContinentID, Name, NeighbourID
-            //FROM Continents
-            //JOIN NeightbourContinents
-            //    ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
-
+            /**
+             * SQL object that stores SQL query
+             *
+             * 
+                SELECT
+                    ContinentID, Name, NeighbourID
+                FROM Continents
+                JOIN NeightbourContinents
+                    ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
+             * 
+             */
             SqlCommand selectContinentsSql = new SqlCommand("SELECT " +
                 "ContinentID, Name, Continents_Neighbour_ContinentID " +
             "FROM Continents " +
@@ -44,6 +48,7 @@ namespace Manhattan.Repository
             // Loop through data and push to List<Continent> continents
             using (connection)
             {
+                // The connection is automatically closed at the end of the using block.
                 connection.Open();
 
                 // SQL reader
@@ -65,6 +70,7 @@ namespace Manhattan.Repository
                         continents.Add(continent);
                     }
 
+                    // Retrieve neighbour continent ID
                     int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
 
                     // Retrieve continent index in list
@@ -77,9 +83,9 @@ namespace Manhattan.Repository
                         continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
                     }
                 }
-
-                return continents;
             }
+
+            return continents;
         }
     }
 }
