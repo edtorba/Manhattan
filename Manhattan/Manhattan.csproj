@@ -83,7 +83,6 @@
     </Compile>
     <Compile Include="Models\Continent.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\NeighbourContinent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DatabaseReader.cs" />
   </ItemGroup>

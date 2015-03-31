@@ -35,7 +35,7 @@ namespace Manhattan.Repository
             //    ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
 
             SqlCommand selectContinentsSql = new SqlCommand("SELECT " +
-                "ContinentID, Name, NeighbourID " +
+                "ContinentID, Name, Continents_Neighbour_ContinentID " +
             "FROM Continents " +
             "JOIN NeightbourContinents " +
                 "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID",
@@ -65,7 +65,7 @@ namespace Manhattan.Repository
                         continents.Add(continent);
                     }
 
-                    int neighbourContinentID = (int)continentsList["NeighbourID"];
+                    int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
 
                     // Retrieve continent index in list
                     int continentIndex = continents.FindIndex(x => x.ContinentID.Equals(continent.ContinentID));
