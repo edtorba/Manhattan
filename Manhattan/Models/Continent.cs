@@ -10,10 +10,10 @@ namespace Manhattan.Models
     {
         public int ContinentID { get; set; }
         public string Name { get; set; }
-        public List<NeighbourContinent> NeighbourContinents { get; set; }
+        public List<int> NeighbourContinents { get; set; }
         public List<Country> Countries { get; set; }
 
-        public Continent(int ContinentID, string Name, List<NeighbourContinent> NeighbourContinents, List<Country> Countries)
+        public Continent(int ContinentID, string Name, List<int> NeighbourContinents, List<Country> Countries)
         {
             this.ContinentID = ContinentID;
             this.Name = Name;

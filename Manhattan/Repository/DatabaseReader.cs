@@ -26,32 +26,19 @@ namespace Manhattan.Repository
             // Create a new list to store continents
             List<Continent> continents = new List<Continent>();
 
-            // List to store neighbour continents
-            List<NeighbourContinent> neighbourContinents;
-
             // SQL object that stores our SQL query
 
             //SELECT
-            //    ContinentsA.ContinentID,
-            //    ContinentsA.Name,
-            //    ContinentsB.ContinentID AS NeighbourContinentID,
-            //    ContinentsB.Name AS NeighbourContinentName 
-            //FROM Continents ContinentsA
+            //    ContinentID, Name, NeighbourID
+            //FROM Continents
             //JOIN NeightbourContinents
-            //    ON ContinentsA.ContinentID = NeightbourContinents.Continents_ContinentID
-            //JOIN Continents ContinentsB
-            //    ON ContinentsB.ContinentID = NeightbourContinents.Continents_Neighbour_ContinentID;
+            //    ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
 
             SqlCommand selectContinentsSql = new SqlCommand("SELECT " +
-                "ContinentsA.ContinentID," +
-                "ContinentsA.Name," +
-                "ContinentsB.ContinentID AS NeighbourContinentID," +
-                "ContinentsB.Name AS NeighbourContinentName " +
-            "FROM Continents ContinentsA " +
+                "ContinentID, Name, NeighbourID " +
+            "FROM Continents " +
             "JOIN NeightbourContinents " +
-                "ON ContinentsA.ContinentID = NeightbourContinents.Continents_ContinentID " +
-            "JOIN Continents ContinentsB " +
-                "ON ContinentsB.ContinentID = NeightbourContinents.Continents_Neighbour_ContinentID",
+                "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID",
             connection);
 
             // Loop through data and push to List<Continent> continents
@@ -67,7 +54,7 @@ namespace Manhattan.Repository
                     Continent continent = new Continent(
                         (int)continentsList["ContinentID"],
                         (string)continentsList["Name"],
-                        new List<NeighbourContinent>(),
+                        new List<int>(),
                         null
                     );
 
@@ -78,18 +65,16 @@ namespace Manhattan.Repository
                         continents.Add(continent);
                     }
 
-                    NeighbourContinent neighbourContinent = new NeighbourContinent(
-                        (int)continentsList["NeighbourContinentID"],
-                        (string)continentsList["NeighbourContinentName"]
-                    );
+                    int neighbourContinentID = (int)continentsList["NeighbourID"];
 
                     // Retrieve continent index in list
                     int continentIndex = continents.FindIndex(x => x.ContinentID.Equals(continent.ContinentID));
 
                     // Check if neighbour continent is already in list
-                    if (!continents[continentIndex].NeighbourContinents.Exists(x => x.ContinentID.Equals(neighbourContinent.ContinentID))) {
-                        // Add neighbour continent to list
-                        continents[continentIndex].NeighbourContinents.Add(neighbourContinent);
+                    if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
+                    {
+                        // Add neighbour continent ID to list
+                        continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
                     }
                 }
 
