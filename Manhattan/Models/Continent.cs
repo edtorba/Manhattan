@@ -10,7 +10,7 @@ namespace Manhattan.Models
     {
         public int ContinentID { get; set; }
         public string Name { get; set; }
-        public List<NeightbourContinent> NeightbourContinents { get; set; }
+        public List<NeighbourContinent> NeightbourContinents { get; set; }
         public List<Country> Countries { get; set; }
 
         public Continent(int ContinentID, string Name, List<Country> Countries)
