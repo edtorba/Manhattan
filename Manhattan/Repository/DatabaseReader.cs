@@ -32,17 +32,21 @@ namespace Manhattan.Repository
              *
              * 
                 SELECT
-                    ContinentID, Name, NeighbourID
+                    ContinentID, Name, NeighbourID, Country_CountryID
                 FROM Continents
                 JOIN NeightbourContinents
                     ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
+                JOIN Countries
+	                ON Continents.ContinentID = Countries.Continents_ContinentID
              * 
              */
             SqlCommand selectContinentsSql = new SqlCommand("SELECT " +
-                "ContinentID, Name, Continents_Neighbour_ContinentID " +
+                "ContinentID, Name, Continents_Neighbour_ContinentID, Country_CountryID " +
             "FROM Continents " +
             "JOIN NeightbourContinents " +
-                "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID",
+                "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID " +
+            "JOIN Countries " +
+                "ON Continents.ContinentID = Countries.Continents_ContinentID",
             connection);
 
             // Loop through data and push to List<Continent> continents
@@ -55,12 +59,14 @@ namespace Manhattan.Repository
                 SqlDataReader continentsList = selectContinentsSql.ExecuteReader();
                 while (continentsList.Read())
                 {
-                    // Continent
+                    /**
+                     * Continent
+                     */
                     Continent continent = new Continent(
                         (int)continentsList["ContinentID"],
                         (string)continentsList["Name"],
                         new List<int>(),
-                        null
+                        new List<int>()
                     );
 
                     // Check if continent is already in continents list
@@ -70,17 +76,33 @@ namespace Manhattan.Repository
                         continents.Add(continent);
                     }
 
-                    // Retrieve neighbour continent ID
-                    int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
-
                     // Retrieve continent index in list
                     int continentIndex = continents.FindIndex(x => x.ContinentID.Equals(continent.ContinentID));
+
+                    /**
+                     * Neighbour continent
+                     */
+                    // Retrieve neighbour continent ID
+                    int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
 
                     // Check if neighbour continent is already in list
                     if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
                     {
                         // Add neighbour continent ID to list
                         continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
+                    }
+
+                    /**
+                     * Countries
+                     */
+                    // Retrieve country ID
+                    int countryID = (int)continentsList["Country_CountryID"];
+
+                    // Check if country is already in list
+                    if (!continents[continentIndex].Countries.Contains(countryID))
+                    {
+                        // Add country ID to list
+                        continents[continentIndex].Countries.Add(countryID);
                     }
                 }
             }
