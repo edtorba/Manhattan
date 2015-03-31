@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Manhattan.Models;
+using Manhattan.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +11,10 @@ namespace Manhattan.Controllers
     public class ContinentsController : ApiController
     {
         // GET api/continents
-        public IEnumerable<string> Get()
+        public IEnumerable<Continent> Get()
         {
-            return new string[] { "Europe", "Asia" };
+            // Get list of continents
+            return DatabaseReader.getContinents();
         }
 
         // Get api/continents/ID
