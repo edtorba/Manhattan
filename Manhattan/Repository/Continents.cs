@@ -1,6 +1,7 @@
 ﻿using Manhattan.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -111,7 +112,7 @@ namespace Manhattan.Repository
         }
 
         /**
-         * Retrieve specific continent data
+         * Retrieve specific continent
          * 
          * GET api/continents/ID
          */
@@ -210,6 +211,68 @@ namespace Manhattan.Repository
         }
 
         /**
+         * Insert new continent
+         * 
+         * POST api/continents
+         */
+        public static Boolean postContinent(Continent continent)
+        {
+            // Etablish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             *
+                INSERT INTO Continents
+                    Name
+                VALUES
+                    (@name);
+             * 
+             */
+            SqlCommand postContinentSql = new SqlCommand(null, connection);
+
+            // Prepare statement
+            postContinentSql.CommandText = "INSERT INTO Continents " +
+                "(Name) " +
+            "VALUES " +
+                "(@Name)";
+
+            SqlParameter nameParam = new SqlParameter("@Name", continent.Name);
+            postContinentSql.Parameters.Add(nameParam);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Executes insert query and returns number of rows affected
+                int result = postContinentSql.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /**
+         * Update specific continent
+         * 
+         * PUT api/continents/ID
+         */
+        public static Boolean putContinent(int id, Continent continent)
+        {
+            // TODO
+            return false;
+        }
+
+        /**
          * Delete specific continent
          * 
          * DELETE api/continents/ID
@@ -229,7 +292,7 @@ namespace Manhattan.Repository
             SqlCommand deleteContinentSql = new SqlCommand(null, connection);
 
             // Prepare statement
-            deleteContinentSql.CommandText = "DELETE * FROM Continents WHERE ContinentID = @id";
+            deleteContinentSql.CommandText = "DELETE FROM Continents WHERE ContinentID = @id";
 
             SqlParameter idParam = new SqlParameter("@id", id);
             deleteContinentSql.Parameters.Add(idParam);

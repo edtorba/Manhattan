@@ -37,13 +37,27 @@ namespace Manhattan.Controllers
         }
 
         // POST api/continents
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Continent continent)
         {
-            // TODO
+            if (continent != null)
+            {
+                if (Continents.postContinent(continent))
+                {
+                    this.StatusCode(HttpStatusCode.Created);
+                }
+                else
+                {
+                    this.StatusCode(HttpStatusCode.InternalServerError);
+                }
+            }
+            else
+            {
+                this.BadRequest();
+            }
         }
 
         // PUT api/continents/ID
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Continent continent)
         {
             // TODO Insert new
         }
