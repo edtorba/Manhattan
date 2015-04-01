@@ -18,9 +18,10 @@ namespace Manhattan.Controllers
         }
 
         // Get api/continents/ID
-        public string Get(int id)
+        public Object Get(int id)
         {
-            return "Europe";
+            // Get continent
+            return Continents.getContinent(id);
         }
 
         // POST api/continents
