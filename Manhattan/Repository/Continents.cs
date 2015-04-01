@@ -113,7 +113,7 @@ namespace Manhattan.Repository
         /**
          * Retrieve specific continent data
          * 
-         * GET api/continents
+         * GET api/continents/ID
          */
         public static Continent getContinent(int id)
         {
@@ -160,7 +160,7 @@ namespace Manhattan.Repository
 
                 // SQL reader
                 SqlDataReader continentData = selectContinentSql.ExecuteReader();
-                // TODO: Check if result is empty return error message
+
                 while (continentData.Read())
                 {
                     /**
@@ -207,6 +207,51 @@ namespace Manhattan.Repository
             }
 
             return continent;
+        }
+
+        /**
+         * Delete specific continent
+         * 
+         * DELETE api/continents/ID
+         */
+        public static Boolean deleteContinent(int id)
+        {
+            // Etablish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             * 
+                DELETE * FROM Continents WHERE ContinentID = @id
+             * 
+             */
+            SqlCommand deleteContinentSql = new SqlCommand(null, connection);
+
+            // Prepare statement
+            deleteContinentSql.CommandText = "DELETE * FROM Continents WHERE ContinentID = @id";
+
+            SqlParameter idParam = new SqlParameter("@id", id);
+            deleteContinentSql.Parameters.Add(idParam);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Executes delete query and returns number of rows affected
+                int result = deleteContinentSql.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

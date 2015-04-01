@@ -51,7 +51,16 @@ namespace Manhattan.Controllers
         // DELETE api/continents/ID
         public void Delete(int id)
         {
-            // TODO detele
+            // Delete continent
+            Boolean result = Continents.deleteContinent(id);
+            if (result)
+            {
+                this.StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                this.NotFound();
+            }
         }
     }
 }
