@@ -14,7 +14,7 @@ namespace Manhattan.Controllers
         public IEnumerable<Continent> Get()
         {
             // Get list of continents
-            return DatabaseReader.getContinents();
+            return Continents.getContinents();
         }
 
         // Get api/continents/ID

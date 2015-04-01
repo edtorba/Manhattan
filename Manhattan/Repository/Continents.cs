@@ -8,7 +8,7 @@ using System.Web.Configuration;
 
 namespace Manhattan.Repository
 {
-    public class DatabaseReader
+    public class Continents
     {
         private static string _ConnectionString = WebConfigurationManager
                                                     .ConnectionStrings["SOFT338_ConnectionString"]
