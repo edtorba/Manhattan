@@ -8,6 +8,10 @@ using System.Web.Http;
 
 namespace Manhattan.Controllers
 {
+    /**
+     * ApiController Methods
+     * https://msdn.microsoft.com/en-us/library/system.web.http.apicontroller_methods%28v=vs.118%29.aspx
+     */
     public class ContinentsController : ApiController
     {
         // GET api/continents
@@ -21,7 +25,15 @@ namespace Manhattan.Controllers
         public Object Get(int id)
         {
             // Get continent
-            return Continents.getContinent(id);
+            Object result = Continents.getContinent(id);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return this.NotFound();
+            }
         }
 
         // POST api/continents
