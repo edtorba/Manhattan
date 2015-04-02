@@ -137,9 +137,9 @@ namespace Manhattan.Repository
                 SELECT
                     ContinentID, Name, NeighbourID, Country_CountryID
                 FROM Continents
-                JOIN NeightbourContinents
+                LEFT JOIN NeightbourContinents
                     ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
-                JOIN Countries
+                LEFT JOIN Countries
 	                ON Continents.ContinentID = Countries.Continents_ContinentID
                 WHERE ContinentID = @id
              * 
@@ -244,10 +244,10 @@ namespace Manhattan.Repository
              */
             SqlCommand postContinentSql = new SqlCommand(null, connection);
 
-            // Prepare statement
+            // Prepare statement for continent
             postContinentSql.CommandText = "INSERT INTO Continents " +
                 "(Name) " +
-            "VALUES " +
+            "output INSERTED.ContinentID VALUES " +
                 "(@Name)";
 
             SqlParameter nameParam = new SqlParameter("@Name", continent.Name);
@@ -259,17 +259,25 @@ namespace Manhattan.Repository
                 // The connection is automatically closed at the end of the using block.
                 connection.Open();
 
-                // Executes insert query and returns number of rows affected
-                int result = postContinentSql.ExecuteNonQuery();
+                // Executes insert query and returns identity of the most recently added record
+                int continentID = (int)postContinentSql.ExecuteScalar();
 
-                if (result > 0)
+                // Insert neighbour continents
+                foreach (var neighbour in continent.NeighbourContinents)
                 {
-                    return true;
+                    // Prepare statement for continent neighbours
+                    SqlCommand continentNeighboursSql = new SqlCommand("INSERT INTO NeightbourContinents " +
+                        "(Continents_ContinentID, Continents_Neighbour_ContinentID) " +
+                    "VALUES " +
+                        "(@ContinentID, @NeighbourID)",
+                    connection);
+
+                    continentNeighboursSql.Parameters.AddWithValue("@ContinentID", continentID);
+                    continentNeighboursSql.Parameters.AddWithValue("@NeighbourID", neighbour);
+                    continentNeighboursSql.ExecuteNonQuery();
                 }
-                else
-                {
-                    return false;
-                }
+
+                return true;
             }
         }
 
@@ -302,12 +310,14 @@ namespace Manhattan.Repository
              * 
              */
             SqlCommand deleteContinentSql = new SqlCommand(null, connection);
+            SqlCommand deleteFromNeighbours = new SqlCommand(null, connection);
 
             // Prepare statement
             deleteContinentSql.CommandText = "DELETE FROM Continents WHERE ContinentID = @id";
+            deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @id";
 
-            SqlParameter idParam = new SqlParameter("@id", id);
-            deleteContinentSql.Parameters.Add(idParam);
+            deleteContinentSql.Parameters.AddWithValue("@id", id);
+            deleteFromNeighbours.Parameters.AddWithValue("@id", id);
 
             // Execute query
             using (connection)
@@ -315,7 +325,10 @@ namespace Manhattan.Repository
                 // The connection is automatically closed at the end of the using block.
                 connection.Open();
 
-                // Executes delete query and returns number of rows affected
+                // Execute delete query (from neighbours)
+                deleteFromNeighbours.ExecuteNonQuery();
+
+                // Executes delete query and returns number of rows affected (from continents)
                 int result = deleteContinentSql.ExecuteNonQuery();
 
                 if (result > 0)
