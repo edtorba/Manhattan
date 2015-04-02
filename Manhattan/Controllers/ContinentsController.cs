@@ -47,7 +47,7 @@ namespace Manhattan.Controllers
                 }
                 else
                 {
-                    this.StatusCode(HttpStatusCode.BadRequest);
+                    this.BadRequest();
                 }
             }
             else
@@ -67,7 +67,7 @@ namespace Manhattan.Controllers
                 }
                 else
                 {
-                    this.StatusCode(HttpStatusCode.BadRequest);
+                    this.BadRequest();
                 }
             }
             else
