@@ -24,8 +24,16 @@ namespace Manhattan.Controllers
         // GET api/countries/ID
         public Object Get(int id)
         {
-            // TODO
-            return null;
+            // Get country
+            Object result = Countries.getCountry(id);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return this.NotFound();
+            }
         }
 
         // POST api/countries

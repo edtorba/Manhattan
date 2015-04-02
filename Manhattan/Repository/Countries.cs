@@ -74,5 +74,65 @@ namespace Manhattan.Repository
 
             return countries;
         }
+
+        /**
+         * Retrieve specific country
+         *
+         * GET api/countries/ID
+         */
+        public static Country getCountry(int id)
+        {
+            // Initialise country object
+            Country country = null;
+
+            // Establish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             * 
+                SELECT
+                    Name
+                FROM Country
+                WHERE CountryID = @id
+             * 
+             */
+            SqlCommand selectCountrySql = new SqlCommand(null, connection);
+
+            // Prepare statement
+            selectCountrySql.CommandText = "SELECT " +
+                "CountryID, Name, Capital " +
+            "FROM Country " +
+            "WHERE CountryID = @countryID";
+
+            selectCountrySql.Parameters.AddWithValue("@countryID", id);
+
+            // Loop through data and push to List<Continent> continents
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // SQL reader
+                SqlDataReader countryData = selectCountrySql.ExecuteReader();
+                while (countryData.Read())
+                {
+                    /**
+                     * Country
+                     */
+                    if (country == null)
+                    {
+                        country = new Country(
+                            (int)countryData["CountryID"],
+                            (string)countryData["Name"],
+                            (string)countryData["Capital"]
+                        );
+                    }
+                }
+            }
+
+            return country;
+        }
     }
 }
