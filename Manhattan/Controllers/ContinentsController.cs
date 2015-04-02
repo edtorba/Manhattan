@@ -17,14 +17,12 @@ namespace Manhattan.Controllers
         // GET api/continents
         public IEnumerable<Continent> Get()
         {
-            // Get list of continents
             return Continents.getContinents();
         }
 
         // GET api/continents/ID
         public Object Get(int id)
         {
-            // Get continent
             Object result = Continents.getContinent(id);
             if (result != null)
             {
@@ -79,7 +77,6 @@ namespace Manhattan.Controllers
         // DELETE api/continents/ID
         public object Delete(int id)
         {
-            // Delete continent
             if (Continents.deleteContinent(id))
             {
                 return this.StatusCode(HttpStatusCode.NoContent);

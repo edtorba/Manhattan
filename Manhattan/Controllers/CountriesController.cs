@@ -18,14 +18,12 @@ namespace Manhattan.Controllers
         // GET api/countries
         public IEnumerable<Country> Get()
         {
-            // Get list of countries
             return Countries.getCountries();
         }
 
         // GET api/countries/ID
         public Object Get(int id)
         {
-            // Get country
             Object result = Countries.getCountry(id);
             if (result != null)
             {
