@@ -21,7 +21,7 @@ namespace Manhattan.Controllers
             return Continents.getContinents();
         }
 
-        // Get api/continents/ID
+        // GET api/continents/ID
         public Object Get(int id)
         {
             // Get continent
