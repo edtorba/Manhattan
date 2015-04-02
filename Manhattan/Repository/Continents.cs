@@ -35,18 +35,18 @@ namespace Manhattan.Repository
                 SELECT
                     ContinentID, Name, NeighbourID, Country_CountryID
                 FROM Continents
-                JOIN NeightbourContinents
+                LEFT JOIN NeightbourContinents
                     ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID
-                JOIN Countries
+                LEFT JOIN Countries
 	                ON Continents.ContinentID = Countries.Continents_ContinentID
              * 
              */
             SqlCommand selectContinentsSql = new SqlCommand("SELECT " +
                 "ContinentID, Name, Continents_Neighbour_ContinentID, Country_CountryID " +
             "FROM Continents " +
-            "JOIN NeightbourContinents " +
+            "LEFT JOIN NeightbourContinents " +
                 "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID " +
-            "JOIN Countries " +
+            "LEFT JOIN Countries " +
                 "ON Continents.ContinentID = Countries.Continents_ContinentID",
             connection);
 
@@ -84,26 +84,32 @@ namespace Manhattan.Repository
                      * Neighbour continent
                      */
                     // Retrieve neighbour continent ID
-                    int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
-
-                    // Check if neighbour continent is already in list
-                    if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
+                    if (continentsList["Continents_Neighbour_ContinentID"] != DBNull.Value)
                     {
-                        // Add neighbour continent ID to list
-                        continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
+                        int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
+
+                        // Check if neighbour continent is already in list
+                        if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
+                        {
+                            // Add neighbour continent ID to list
+                            continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
+                        }
                     }
 
                     /**
                      * Countries
                      */
                     // Retrieve country ID
-                    int countryID = (int)continentsList["Country_CountryID"];
-
-                    // Check if country is already in list
-                    if (!continents[continentIndex].Countries.Contains(countryID))
+                    if (continentsList["Country_CountryID"] != DBNull.Value)
                     {
-                        // Add country ID to list
-                        continents[continentIndex].Countries.Add(countryID);
+                        int countryID = (int)continentsList["Country_CountryID"];
+
+                        // Check if country is already in list
+                        if (!continents[continentIndex].Countries.Contains(countryID))
+                        {
+                            // Add country ID to list
+                            continents[continentIndex].Countries.Add(countryID);
+                        }
                     }
                 }
             }
@@ -144,9 +150,9 @@ namespace Manhattan.Repository
             selectContinentSql.CommandText = "SELECT " +
                 "ContinentID, Name, Continents_Neighbour_ContinentID, Country_CountryID " +
             "FROM Continents " +
-            "JOIN NeightbourContinents " +
+            "LEFT JOIN NeightbourContinents " +
                 "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID " +
-            "JOIN Countries " +
+            "LEFT JOIN Countries " +
                 "ON Continents.ContinentID = Countries.Continents_ContinentID " +
             "WHERE ContinentID = @id";
 
@@ -181,26 +187,32 @@ namespace Manhattan.Repository
                      * Neighbour continent
                      */
                     // Retrieve neighbour continent ID
-                    int neighbourContinentID = (int)continentData["Continents_Neighbour_ContinentID"];
-
-                    // Check if neighbour continent is already in list
-                    if (!continent.NeighbourContinents.Contains(neighbourContinentID))
+                    if (continentData["Continents_Neighbour_ContinentID"] != DBNull.Value)
                     {
-                        // Add neighbour continent ID to list
-                        continent.NeighbourContinents.Add(neighbourContinentID);
+                        int neighbourContinentID = (int)continentData["Continents_Neighbour_ContinentID"];
+
+                        // Check if neighbour continent is already in list
+                        if (!continent.NeighbourContinents.Contains(neighbourContinentID))
+                        {
+                            // Add neighbour continent ID to list
+                            continent.NeighbourContinents.Add(neighbourContinentID);
+                        }
                     }
 
                     /**
                      * Countries
                      */
                     // Retrieve country ID
-                    int countryID = (int)continentData["Country_CountryID"];
-
-                    // Check if country is already in list
-                    if (!continent.Countries.Contains(countryID))
+                    if (continentData["Country_CountryID"] != DBNull.Value)
                     {
-                        // Add country ID to list
-                        continent.Countries.Add(countryID);
+                        int countryID = (int)continentData["Country_CountryID"];
+
+                        // Check if country is already in list
+                        if (!continent.Countries.Contains(countryID))
+                        {
+                            // Add country ID to list
+                            continent.Countries.Add(countryID);
+                        }
                     }
                     
                 }
