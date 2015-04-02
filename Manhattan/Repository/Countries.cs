@@ -134,5 +134,62 @@ namespace Manhattan.Repository
 
             return country;
         }
+        
+        /**
+         * Insert new country
+         * 
+         * POST api/country
+         */
+        public static Boolean postCountry(Country country)
+        {
+            // Validate object
+            if (country.Name == null || country.Capital == null)
+            {
+                return false;
+            }
+
+            // Establish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             *
+                INSERT INTO Country
+                    (Name, Capital)
+                VALUES
+                    (@name, @capital);
+             * 
+             */
+            SqlCommand postCountrySql = new SqlCommand(null, connection);
+
+            // Prepare statement for continent
+            postCountrySql.CommandText = "INSERT INTO Country " +
+                "(Name, Capital) " +
+            "VALUES " +
+                "(@name, @capital)";
+
+            postCountrySql.Parameters.AddWithValue("@name", country.Name);
+            postCountrySql.Parameters.AddWithValue("@capital", country.Capital);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Executes insert query and returns identity of the most recently added record
+                int affectedRows = (int)postCountrySql.ExecuteNonQuery();
+
+                if (affectedRows > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

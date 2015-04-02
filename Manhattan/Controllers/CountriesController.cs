@@ -3,6 +3,7 @@ using Manhattan.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
 
@@ -37,9 +38,23 @@ namespace Manhattan.Controllers
         }
 
         // POST api/countries
-        public void Post([FromBody]Country country)
+        public Object Post([FromBody]Country country)
         {
-            // TODO
+            if (country != null)
+            {
+                if (Countries.postCountry(country))
+                {
+                    return this.StatusCode(HttpStatusCode.Created);
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            else
+            {
+                return this.BadRequest();
+            }
         }
 
         // PUT api/countries/ID
