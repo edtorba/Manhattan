@@ -78,9 +78,16 @@ namespace Manhattan.Controllers
         }
 
         // DELETE api/countries/ID
-        public void Delete(int id)
+        public object Delete(int id)
         {
-            // TODO
+            if (Countries.deleteCountry(id))
+            {
+                return this.StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return this.NotFound();
+            }
         }
     }
 }

@@ -179,9 +179,9 @@ namespace Manhattan.Repository
                 connection.Open();
 
                 // Executes insert query and returns identity of the most recently added record
-                int affectedRows = (int)postCountrySql.ExecuteNonQuery();
+                int rowsAffected = (int)postCountrySql.ExecuteNonQuery();
 
-                if (affectedRows > 0)
+                if (rowsAffected > 0)
                 {
                     return true;
                 }
@@ -236,6 +236,57 @@ namespace Manhattan.Repository
 
                 // Executes delete query and returns number of rows affected (from continents)
                 int rowsAffected = putCountrySql.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /**
+         * Delete specific country
+         * 
+         * DELETE api/countries
+         */
+        public static Boolean deleteCountry(int id)
+        {
+            // Establish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             * 
+                DELETE FROM Country WHERE CountryID = @countryID
+                DELETE FROM Countries WHERE Country_CountryID = @countryID
+             * 
+             */
+            SqlCommand deleteCountrySql = new SqlCommand(null, connection);
+            SqlCommand deleteFromCountriesSql = new SqlCommand(null, connection);
+
+            // Prepare statement
+            deleteCountrySql.CommandText = "DELETE FROM Country WHERE CountryID = @countryID";
+            deleteFromCountriesSql.CommandText = "DELETE FROM Countries WHERE Country_CountryID = @countryID";
+
+            deleteCountrySql.Parameters.AddWithValue("@countryID", id);
+            deleteFromCountriesSql.Parameters.AddWithValue("@countryID", id);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Execute delete query (from countries)
+                deleteFromCountriesSql.ExecuteNonQuery();
+
+                // Executes delete query and returns number of rows affected (from country)
+                int rowsAffected = deleteCountrySql.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {

@@ -430,7 +430,7 @@ namespace Manhattan.Repository
              * SQL object that stores SQL query
              *
              * 
-                DELETE * FROM Continents WHERE ContinentID = @id
+                DELETE FROM Continents WHERE ContinentID = @id
              * 
              */
             SqlCommand deleteContinentSql = new SqlCommand(null, connection);
