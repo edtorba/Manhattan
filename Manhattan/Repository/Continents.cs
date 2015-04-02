@@ -231,6 +231,12 @@ namespace Manhattan.Repository
          */
         public static Boolean postContinent(Continent continent)
         {
+            // Validate object
+            if (continent.Name == null)
+            {
+                return false;
+            }
+
             // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
@@ -239,8 +245,8 @@ namespace Manhattan.Repository
              *
              *
                 INSERT INTO Continents
-                    Name
-                VALUES
+                    (Name)
+                "output INSERTED.ContinentID VALUES
                     (@name);
              * 
              */

@@ -37,22 +37,22 @@ namespace Manhattan.Controllers
         }
 
         // POST api/continents
-        public void Post([FromBody]Continent continent)
+        public object Post([FromBody]Continent continent)
         {
             if (continent != null)
             {
                 if (Continents.postContinent(continent))
                 {
-                    this.StatusCode(HttpStatusCode.Created);
+                    return this.StatusCode(HttpStatusCode.Created);
                 }
                 else
                 {
-                    this.BadRequest();
+                    return this.BadRequest();
                 }
             }
             else
             {
-                this.BadRequest();
+                return this.BadRequest();
             }
         }
 
