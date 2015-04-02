@@ -63,52 +63,55 @@ namespace Manhattan.Repository
                     /**
                      * Continent
                      */
-                    Continent continent = new Continent(
-                        (int)continentsList["ContinentID"],
-                        (string)continentsList["Name"],
-                        new List<int>(),
-                        new List<int>()
-                    );
-
-                    // Check if continent is already in continents list
-                    if (!continents.Exists(x => x.ContinentID.Equals(continent.ContinentID)))
+                    if (continentsList["Name"] != DBNull.Value)
                     {
-                        // Add continent to continents list
-                        continents.Add(continent);
-                    }
+                        Continent continent = new Continent(
+                            (int)continentsList["ContinentID"],
+                            (string)continentsList["Name"],
+                            new List<int>(),
+                            new List<int>()
+                        );
 
-                    // Retrieve continent index in list
-                    int continentIndex = continents.FindIndex(x => x.ContinentID.Equals(continent.ContinentID));
-
-                    /**
-                     * Neighbour continent
-                     */
-                    // Retrieve neighbour continent ID
-                    if (continentsList["Continents_Neighbour_ContinentID"] != DBNull.Value)
-                    {
-                        int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
-
-                        // Check if neighbour continent is already in list
-                        if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
+                        // Check if continent is already in continents list
+                        if (!continents.Exists(x => x.ContinentID.Equals(continent.ContinentID)))
                         {
-                            // Add neighbour continent ID to list
-                            continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
+                            // Add continent to continents list
+                            continents.Add(continent);
                         }
-                    }
 
-                    /**
-                     * Countries
-                     */
-                    // Retrieve country ID
-                    if (continentsList["Country_CountryID"] != DBNull.Value)
-                    {
-                        int countryID = (int)continentsList["Country_CountryID"];
+                        // Retrieve continent index in list
+                        int continentIndex = continents.FindIndex(x => x.ContinentID.Equals(continent.ContinentID));
 
-                        // Check if country is already in list
-                        if (!continents[continentIndex].Countries.Contains(countryID))
+                        /**
+                         * Neighbour continent
+                         */
+                        // Retrieve neighbour continent ID
+                        if (continentsList["Continents_Neighbour_ContinentID"] != DBNull.Value)
                         {
-                            // Add country ID to list
-                            continents[continentIndex].Countries.Add(countryID);
+                            int neighbourContinentID = (int)continentsList["Continents_Neighbour_ContinentID"];
+
+                            // Check if neighbour continent is already in list
+                            if (!continents[continentIndex].NeighbourContinents.Contains(neighbourContinentID))
+                            {
+                                // Add neighbour continent ID to list
+                                continents[continentIndex].NeighbourContinents.Add(neighbourContinentID);
+                            }
+                        }
+
+                        /**
+                         * Countries
+                         */
+                        // Retrieve country ID
+                        if (continentsList["Country_CountryID"] != DBNull.Value)
+                        {
+                            int countryID = (int)continentsList["Country_CountryID"];
+
+                            // Check if country is already in list
+                            if (!continents[continentIndex].Countries.Contains(countryID))
+                            {
+                                // Add country ID to list
+                                continents[continentIndex].Countries.Add(countryID);
+                            }
                         }
                     }
                 }
