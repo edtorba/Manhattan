@@ -314,15 +314,15 @@ namespace Manhattan.Repository
              * SQL object that stores SQL query
              *
              *
-                UPDATE Continents
-                    Name = @name
+                UPDATE Continents SET 
+                    Name = @name 
                 WHERE ContinentID = @id
              * 
              */
             SqlCommand putContinentSql = new SqlCommand(null, connection);
 
             // Prepare statement for continent
-            putContinentSql.CommandText = "UPDATE Continents " +
+            putContinentSql.CommandText = "UPDATE Continents SET " +
                 "Name = @name " +
             "WHERE ContinentID = @id";
 
@@ -349,6 +349,12 @@ namespace Manhattan.Repository
 
                     deleteFromNeighbours.Parameters.AddWithValue("@id", id);
                     deleteFromCountries.Parameters.AddWithValue("@id", id);
+
+                    // Execute delete query (from neighbours)
+                    deleteFromNeighbours.ExecuteNonQuery();
+
+                    // Execute delete query (from countries)
+                    deleteFromCountries.ExecuteNonQuery();
 
                     // Insert neighbour continents
                     if (continent.NeighbourContinents != null)
