@@ -339,10 +339,10 @@ namespace Manhattan.Repository
             // Prepare statement for continent
             putContinentSql.CommandText = "UPDATE Continents SET " +
                 "Name = @name " +
-            "WHERE ContinentID = @id";
+            "WHERE ContinentID = @continentID";
 
             putContinentSql.Parameters.AddWithValue("@name", continent.Name);
-            putContinentSql.Parameters.AddWithValue("@id", id);
+            putContinentSql.Parameters.AddWithValue("@continentID", id);
 
             // Execute query
             using (connection)
@@ -359,11 +359,11 @@ namespace Manhattan.Repository
                     SqlCommand deleteFromNeighbours = new SqlCommand(null, connection);
                     SqlCommand deleteFromCountries = new SqlCommand(null, connection);
 
-                    deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @id";
-                    deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @id";
+                    deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @continentID";
+                    deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @continentID";
 
-                    deleteFromNeighbours.Parameters.AddWithValue("@id", id);
-                    deleteFromCountries.Parameters.AddWithValue("@id", id);
+                    deleteFromNeighbours.Parameters.AddWithValue("@continentID", id);
+                    deleteFromCountries.Parameters.AddWithValue("@continentID", id);
 
                     // Execute delete query (from neighbours)
                     deleteFromNeighbours.ExecuteNonQuery();
