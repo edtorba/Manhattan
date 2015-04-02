@@ -25,7 +25,7 @@ namespace Manhattan.Repository
             // Create a new list to store continents
             List<Continent> continents = new List<Continent>();
 
-            // Etablish a new connection using connection string in the web.config
+            // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
             /**
@@ -127,7 +127,7 @@ namespace Manhattan.Repository
             // Initialise continent object
             Continent continent = null;
 
-            // Etablish a new connection using connection string in the web.config
+            // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
             /**
@@ -229,7 +229,7 @@ namespace Manhattan.Repository
          */
         public static Boolean postContinent(Continent continent)
         {
-            // Etablish a new connection using connection string in the web.config
+            // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
             /**
@@ -320,7 +320,7 @@ namespace Manhattan.Repository
          */
         public static Boolean deleteContinent(int id)
         {
-            // Etablish a new connection using connection string in the web.config
+            // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
             /**
