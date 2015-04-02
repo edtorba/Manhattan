@@ -57,22 +57,22 @@ namespace Manhattan.Controllers
         }
 
         // PUT api/continents/ID
-        public void Put(int id, [FromBody]Continent continent)
+        public object Put(int id, [FromBody]Continent continent)
         {
             if (continent != null)
             {
                 if (Continents.putContinent(id, continent))
                 {
-                    this.StatusCode(HttpStatusCode.NoContent);
+                    return this.StatusCode(HttpStatusCode.NoContent);
                 }
                 else
                 {
-                    this.BadRequest();
+                    return this.BadRequest();
                 }
             }
             else
             {
-                this.BadRequest();
+                return this.BadRequest();
             }
         }
 

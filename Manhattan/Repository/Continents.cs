@@ -316,6 +316,12 @@ namespace Manhattan.Repository
          */
         public static Boolean putContinent(int id, Continent continent)
         {
+            // Validate object
+            if (continent.Name == null)
+            {
+                return false;
+            }
+
             // Establish a new connection using connection string in the web.config
             SqlConnection connection = new SqlConnection(_ConnectionString);
 
