@@ -356,9 +356,9 @@ namespace Manhattan.Repository
                 deleteFromNeighbours.ExecuteNonQuery();
 
                 // Executes delete query and returns number of rows affected (from continents)
-                int result = deleteContinentSql.ExecuteNonQuery();
+                int rowsAffected = deleteContinentSql.ExecuteNonQuery();
 
-                if (result > 0)
+                if (rowsAffected > 0)
                 {
                     return true;
                 }

@@ -66,8 +66,7 @@ namespace Manhattan.Controllers
         public void Delete(int id)
         {
             // Delete continent
-            Boolean result = Continents.deleteContinent(id);
-            if (result)
+            if (Continents.deleteContinent(id))
             {
                 this.StatusCode(HttpStatusCode.NoContent);
             }
