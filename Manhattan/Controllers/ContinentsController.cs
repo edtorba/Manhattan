@@ -77,16 +77,16 @@ namespace Manhattan.Controllers
         }
 
         // DELETE api/continents/ID
-        public void Delete(int id)
+        public object Delete(int id)
         {
             // Delete continent
             if (Continents.deleteContinent(id))
             {
-                this.StatusCode(HttpStatusCode.NoContent);
+                return this.StatusCode(HttpStatusCode.NoContent);
             }
             else
             {
-                this.NotFound();
+                return this.NotFound();
             }
         }
     }
