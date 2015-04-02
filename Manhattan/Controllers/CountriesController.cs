@@ -1,4 +1,5 @@
 ﻿using Manhattan.Models;
+using Manhattan.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,8 @@ namespace Manhattan.Controllers
         // GET api/countries
         public IEnumerable<Country> Get()
         {
-            // TODO
-            return null;
+            // Get list of countries
+            return Countries.getCountries();
         }
 
         // GET api/countries/ID
