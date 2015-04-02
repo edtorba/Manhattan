@@ -47,7 +47,7 @@ namespace Manhattan.Controllers
                 }
                 else
                 {
-                    this.StatusCode(HttpStatusCode.InternalServerError);
+                    this.StatusCode(HttpStatusCode.BadRequest);
                 }
             }
             else
@@ -59,7 +59,21 @@ namespace Manhattan.Controllers
         // PUT api/continents/ID
         public void Put(int id, [FromBody]Continent continent)
         {
-            // TODO Insert new
+            if (continent != null)
+            {
+                if (Continents.putContinent(id, continent))
+                {
+                    this.StatusCode(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    this.StatusCode(HttpStatusCode.BadRequest);
+                }
+            }
+            else
+            {
+                this.BadRequest();
+            }
         }
 
         // DELETE api/continents/ID

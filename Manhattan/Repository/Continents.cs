@@ -309,8 +309,92 @@ namespace Manhattan.Repository
          */
         public static Boolean putContinent(int id, Continent continent)
         {
-            // TODO
-            return false;
+            // Establish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             *
+                UPDATE Continents
+                    Name = @name
+                WHERE ContinentID = @id
+             * 
+             */
+            SqlCommand putContinentSql = new SqlCommand(null, connection);
+
+            // Prepare statement for continent
+            putContinentSql.CommandText = "UPDATE Continents " +
+                "Name = @name " +
+            "WHERE ContinentID = @id";
+
+            putContinentSql.Parameters.AddWithValue("@name", continent.Name);
+            putContinentSql.Parameters.AddWithValue("@id", id);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Executes delete query and returns number of rows affected (from continents)
+                int rowsAffected = putContinentSql.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    // Update neighbour continents and countries
+                    SqlCommand deleteFromNeighbours = new SqlCommand(null, connection);
+                    SqlCommand deleteFromCountries = new SqlCommand(null, connection);
+
+                    deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @id";
+                    deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @id";
+
+                    deleteFromNeighbours.Parameters.AddWithValue("@id", id);
+                    deleteFromCountries.Parameters.AddWithValue("@id", id);
+
+                    // Insert neighbour continents
+                    if (continent.NeighbourContinents != null)
+                    {
+                        foreach (var neighbour in continent.NeighbourContinents)
+                        {
+                            // Prepare statement for continent neighbours
+                            SqlCommand continentNeighboursSql = new SqlCommand("INSERT INTO NeightbourContinents " +
+                                "(Continents_ContinentID, Continents_Neighbour_ContinentID) " +
+                            "VALUES " +
+                                "(@continentID, @neighbourID)",
+                            connection);
+
+                            continentNeighboursSql.Parameters.AddWithValue("@continentID", id);
+                            continentNeighboursSql.Parameters.AddWithValue("@neighbourID", neighbour);
+                            continentNeighboursSql.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Insert continent countries
+                    if (continent.Countries != null)
+                    {
+                        foreach (var country in continent.Countries)
+                        {
+                            // Prepare statement for continent countries
+                            SqlCommand continentCountriesSql = new SqlCommand("INSERT INTO Countries " +
+                                "(Country_CountryID, Continents_ContinentID) " +
+                            "VALUES " +
+                                "(@countryID, @continentID)",
+                            connection);
+
+                            continentCountriesSql.Parameters.AddWithValue("@countryID", country);
+                            continentCountriesSql.Parameters.AddWithValue("@continentID", id);
+                            continentCountriesSql.ExecuteNonQuery();
+                        }
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         /**
