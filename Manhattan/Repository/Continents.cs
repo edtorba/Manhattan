@@ -263,18 +263,39 @@ namespace Manhattan.Repository
                 int continentID = (int)postContinentSql.ExecuteScalar();
 
                 // Insert neighbour continents
-                foreach (var neighbour in continent.NeighbourContinents)
+                if (continent.NeighbourContinents != null)
                 {
-                    // Prepare statement for continent neighbours
-                    SqlCommand continentNeighboursSql = new SqlCommand("INSERT INTO NeightbourContinents " +
-                        "(Continents_ContinentID, Continents_Neighbour_ContinentID) " +
-                    "VALUES " +
-                        "(@ContinentID, @NeighbourID)",
-                    connection);
+                    foreach (var neighbour in continent.NeighbourContinents)
+                    {
+                        // Prepare statement for continent neighbours
+                        SqlCommand continentNeighboursSql = new SqlCommand("INSERT INTO NeightbourContinents " +
+                            "(Continents_ContinentID, Continents_Neighbour_ContinentID) " +
+                        "VALUES " +
+                            "(@ContinentID, @NeighbourID)",
+                        connection);
 
-                    continentNeighboursSql.Parameters.AddWithValue("@ContinentID", continentID);
-                    continentNeighboursSql.Parameters.AddWithValue("@NeighbourID", neighbour);
-                    continentNeighboursSql.ExecuteNonQuery();
+                        continentNeighboursSql.Parameters.AddWithValue("@ContinentID", continentID);
+                        continentNeighboursSql.Parameters.AddWithValue("@NeighbourID", neighbour);
+                        continentNeighboursSql.ExecuteNonQuery();
+                    }
+                }
+
+                // Insert continent countries
+                if (continent.Countries != null)
+                {
+                    foreach (var country in continent.Countries)
+                    {
+                        // Prepare statement for continent countries
+                        SqlCommand continentCountriesSql = new SqlCommand("INSERT INTO Countries " +
+                            "(Country_CountryID, Continents_ContinentID) " +
+                        "VALUES " +
+                            "(@CountryID, @ContinentID)",
+                        connection);
+
+                        continentCountriesSql.Parameters.AddWithValue("@CountryID", country);
+                        continentCountriesSql.Parameters.AddWithValue("@ContinentID", continentID);
+                        continentCountriesSql.ExecuteNonQuery();
+                    }
                 }
 
                 return true;
@@ -311,19 +332,25 @@ namespace Manhattan.Repository
              */
             SqlCommand deleteContinentSql = new SqlCommand(null, connection);
             SqlCommand deleteFromNeighbours = new SqlCommand(null, connection);
+            SqlCommand deleteFromCountries = new SqlCommand(null, connection);
 
             // Prepare statement
             deleteContinentSql.CommandText = "DELETE FROM Continents WHERE ContinentID = @id";
             deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @id";
+            deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @id";
 
             deleteContinentSql.Parameters.AddWithValue("@id", id);
             deleteFromNeighbours.Parameters.AddWithValue("@id", id);
+            deleteFromCountries.Parameters.AddWithValue("@id", id);
 
             // Execute query
             using (connection)
             {
                 // The connection is automatically closed at the end of the using block.
                 connection.Open();
+
+                // Execute delete query (from countries)
+                deleteFromCountries.ExecuteNonQuery();
 
                 // Execute delete query (from neighbours)
                 deleteFromNeighbours.ExecuteNonQuery();
