@@ -58,9 +58,23 @@ namespace Manhattan.Controllers
         }
 
         // PUT api/countries/ID
-        public void Put(int id, [FromBody]Country country)
+        public object Put(int id, [FromBody]Country country)
         {
-            // TODO
+            if (country != null)
+            {
+                if (Countries.putCountry(id, country))
+                {
+                    return this.StatusCode(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            else
+            {
+                return this.BadRequest();
+            }
         }
 
         // DELETE api/countries/ID

@@ -138,7 +138,7 @@ namespace Manhattan.Repository
         /**
          * Insert new country
          * 
-         * POST api/country
+         * POST api/countries
          */
         public static Boolean postCountry(Country country)
         {
@@ -182,6 +182,62 @@ namespace Manhattan.Repository
                 int affectedRows = (int)postCountrySql.ExecuteNonQuery();
 
                 if (affectedRows > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /**
+         * Update specific country
+         * 
+         * PUT api/countries
+         */
+        public static Boolean putCountry(int id, Country country)
+        {
+            // Validate object
+            if (country.Name == null || country.Capital == null)
+            {
+                return false;
+            }
+
+            // Establish a new connection using connection string in the web.config
+            SqlConnection connection = new SqlConnection(_ConnectionString);
+
+            /**
+             * SQL object that stores SQL query
+             *
+             *
+                UPDATE Country SET 
+                    Name = @name, Capital = @capital
+                WHERE CountryID = @countryID
+             * 
+             */
+            SqlCommand putCountrySql = new SqlCommand(null, connection);
+
+            // Prepare statement for continent
+            putCountrySql.CommandText = "UPDATE Country SET  " +
+                "Name = @name, Capital = @capital " +
+            "WHERE CountryID = @countryID";
+
+            putCountrySql.Parameters.AddWithValue("@name", country.Name);
+            putCountrySql.Parameters.AddWithValue("@capital", country.Capital);
+            putCountrySql.Parameters.AddWithValue("@countryID", id);
+
+            // Execute query
+            using (connection)
+            {
+                // The connection is automatically closed at the end of the using block.
+                connection.Open();
+
+                // Executes delete query and returns number of rows affected (from continents)
+                int rowsAffected = putCountrySql.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
                     return true;
                 }
