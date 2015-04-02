@@ -154,10 +154,9 @@ namespace Manhattan.Repository
                 "ON Continents.ContinentID = NeightbourContinents.Continents_ContinentID " +
             "LEFT JOIN Countries " +
                 "ON Continents.ContinentID = Countries.Continents_ContinentID " +
-            "WHERE ContinentID = @id";
+            "WHERE ContinentID = @continentID";
 
-            SqlParameter idParam = new SqlParameter("@id", id);
-            selectContinentSql.Parameters.Add(idParam);
+            selectContinentSql.Parameters.AddWithValue("@continentID", id);
 
             // Loop through data
             using (connection)
@@ -248,10 +247,9 @@ namespace Manhattan.Repository
             postContinentSql.CommandText = "INSERT INTO Continents " +
                 "(Name) " +
             "output INSERTED.ContinentID VALUES " +
-                "(@Name)";
+                "(@name)";
 
-            SqlParameter nameParam = new SqlParameter("@Name", continent.Name);
-            postContinentSql.Parameters.Add(nameParam);
+            postContinentSql.Parameters.AddWithValue("@name", continent.Name);
 
             // Execute query
             using (connection)
@@ -271,11 +269,11 @@ namespace Manhattan.Repository
                         SqlCommand continentNeighboursSql = new SqlCommand("INSERT INTO NeightbourContinents " +
                             "(Continents_ContinentID, Continents_Neighbour_ContinentID) " +
                         "VALUES " +
-                            "(@ContinentID, @NeighbourID)",
+                            "(@continentID, @neighbourID)",
                         connection);
 
-                        continentNeighboursSql.Parameters.AddWithValue("@ContinentID", continentID);
-                        continentNeighboursSql.Parameters.AddWithValue("@NeighbourID", neighbour);
+                        continentNeighboursSql.Parameters.AddWithValue("@continentID", continentID);
+                        continentNeighboursSql.Parameters.AddWithValue("@neighbourID", neighbour);
                         continentNeighboursSql.ExecuteNonQuery();
                     }
                 }
@@ -289,11 +287,11 @@ namespace Manhattan.Repository
                         SqlCommand continentCountriesSql = new SqlCommand("INSERT INTO Countries " +
                             "(Country_CountryID, Continents_ContinentID) " +
                         "VALUES " +
-                            "(@CountryID, @ContinentID)",
+                            "(@countryID, @continentID)",
                         connection);
 
-                        continentCountriesSql.Parameters.AddWithValue("@CountryID", country);
-                        continentCountriesSql.Parameters.AddWithValue("@ContinentID", continentID);
+                        continentCountriesSql.Parameters.AddWithValue("@countryID", country);
+                        continentCountriesSql.Parameters.AddWithValue("@continentID", continentID);
                         continentCountriesSql.ExecuteNonQuery();
                     }
                 }
@@ -419,13 +417,13 @@ namespace Manhattan.Repository
             SqlCommand deleteFromCountries = new SqlCommand(null, connection);
 
             // Prepare statement
-            deleteContinentSql.CommandText = "DELETE FROM Continents WHERE ContinentID = @id";
-            deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @id";
-            deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @id";
+            deleteContinentSql.CommandText = "DELETE FROM Continents WHERE ContinentID = @continentID";
+            deleteFromNeighbours.CommandText = "DELETE FROM NeightbourContinents WHERE Continents_ContinentID = @continentID";
+            deleteFromCountries.CommandText = "DELETE FROM Countries WHERE Continents_ContinentID = @continentID";
 
-            deleteContinentSql.Parameters.AddWithValue("@id", id);
-            deleteFromNeighbours.Parameters.AddWithValue("@id", id);
-            deleteFromCountries.Parameters.AddWithValue("@id", id);
+            deleteContinentSql.Parameters.AddWithValue("@continentID", id);
+            deleteFromNeighbours.Parameters.AddWithValue("@continentID", id);
+            deleteFromCountries.Parameters.AddWithValue("@continentID", id);
 
             // Execute query
             using (connection)
