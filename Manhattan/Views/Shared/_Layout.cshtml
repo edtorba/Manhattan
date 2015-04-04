@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | Manhattan REST API</title>
+    <!--
+        <link href="~/Content/foo.css" rel="stylesheet" type="text/css" />
+        <script src="~/Scripts/foo.js"></script>
+    -->
+</head>
+<body>
+@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+@RenderBody()
+<footer>
+    <p>&copy; @DateTime.Now.Year - Manhattan REST API</p>
+</footer>
+</body>
+</html>
