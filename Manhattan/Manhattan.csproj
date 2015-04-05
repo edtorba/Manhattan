@@ -128,6 +128,7 @@
     <Content Include="Views\Home\GetCountriesID.cshtml" />
     <Content Include="Views\Home\PostCountries.cshtml" />
     <Content Include="Views\Home\PutCountriesID.cshtml" />
+    <Content Include="Views\Home\DeleteCountriesID.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
