@@ -123,6 +123,7 @@
     <Content Include="Views\Home\GetContinentsID.cshtml" />
     <Content Include="Views\Home\PostContinents.cshtml" />
     <Content Include="Views\Home\PutContinentsID.cshtml" />
+    <Content Include="Views\Home\DeleteContinentsID.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
