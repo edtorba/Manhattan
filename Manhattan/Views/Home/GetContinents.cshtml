@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "GET api/continents";
+}
+<h2>GET api/continents</h2>
+<p>Returns the list of all continents from the database.</p>
+<h3>Resource URL</h3>
+<code>http://MYURL/api/continents</code>
+<h3>Resource Information</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Response formats
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                JSON
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Requires authentication?
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                NO
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Example Request</h3>
+<code>GET http://MYURL/api/continents</code>
+<h3>Example Result</h3>
+<pre><code class="language-javascript">[
+   {
+       "ContinentID": 1,
+       "Name": "Europe",
+       "NeighbourContinents":
+       [
+           3,
+           2
+       ],
+       "Countries":
+       [
+           1,
+           2,
+           3,
+           4,
+           5
+       ]
+   },
+   {
+       "ContinentID": 2,
+       "Name": "Africa",
+       "NeighbourContinents":
+       [
+           1,
+           3
+       ],
+       "Countries":
+       [
+           9,
+           10,
+           11,
+           12
+       ]
+   },
+   {
+       "ContinentID": 3,
+       "Name": "Asia",
+       "NeighbourContinents":
+       [
+           1,
+           6,
+           2,
+           4
+       ],
+       "Countries":
+       [
+           5,
+           6,
+           7,
+           8
+       ]
+   },
+   {
+       "ContinentID": 4,
+       "Name": "North America",
+       "NeighbourContinents":
+       [
+           5,
+           3
+       ],
+       "Countries":
+       [
+           13,
+           14,
+           15,
+           16
+       ]
+   },
+   {
+       "ContinentID": 5,
+       "Name": "South America",
+       "NeighbourContinents":
+       [
+           4
+       ],
+       "Countries":
+       [
+           17,
+           18,
+           19,
+           20
+       ]
+   },
+   {
+       "ContinentID": 6,
+       "Name": "Australia",
+       "NeighbourContinents":
+       [
+           3
+       ],
+       "Countries":
+       [
+           21
+       ]
+   },
+   {
+       "ContinentID": 7,
+       "Name": "Antarctica",
+       "NeighbourContinents":
+       [
+       ],
+       "Countries":
+       [
+       ]
+   }
+]</code></pre>

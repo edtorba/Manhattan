@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "GET api/countries/:id";
+}
+<h2>GET api/countries/:id</h2>
+<p>Returns data for specified country from the database.</p>
+<h3>Resource URL</h3>
+<code>http://MYURL/api/countries/:id</code>
+<h3>Resource Information</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Response formats
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                JSON
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Requires authentication?
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                NO
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Parameters</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                id <span class="text--italic">[Required]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The numerical ID of the desired Country.
+                Example values: 12
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Example Request</h3>
+<code>GET http://MYURL/api/countries/1</code>
+<h3>Example Result</h3>
+<pre><code class="language-javascript">{
+   "CountryID": 1,
+   "Name": "United Kingdom",
+   "Capital": "London"
+}</code></pre>

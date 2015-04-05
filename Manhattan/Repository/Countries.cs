@@ -134,7 +134,7 @@ namespace Manhattan.Repository
 
             return country;
         }
-        
+
         /**
          * Insert new country
          * 

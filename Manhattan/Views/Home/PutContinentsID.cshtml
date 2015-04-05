@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "PUT api/continents/:id";
+}
+<h2>PUT api/continents/:id</h2>
+<p>Updates specified continent data.</p>
+<h3>Resource URL</h3>
+<code>http://MYURL/api/continents/:id</code>
+<h3>Resource Information</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Response formats
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                JSON
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Requires authentication?
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                NO
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Parameters</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                id <span class="text--italic">[Required]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The numerical ID of the desired Continent.
+                Example values: 12
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                name <span class="text--italic">[Required]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The text of the continent name.
+                Example values: Sheldonopolis
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                NeighbourContinents <span class="text--italic">[Optional]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The ID's of an existing continent or continents.
+                Example values: [1] or [1, 2, 4]
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Countries <span class="text--italic">[Optional]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The ID's of an existing countries.
+                Example values: [1] or [1, 2, 4]
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Example Request</h3>
+<code>PUT http://MYURL/api/continents/1</code>
+<p>Body:</p>
+<pre><code class="language-javascript">{
+    "Name": "YOUR_CONTINENT_NAME",
+    "NeighbourContinents":
+    [
+        1,2,4
+    ],
+    "Countries":
+    [
+        1
+    ]
+}</code></pre>
+<h3>Example Result</h3>
+<pre><code class="language-javascript">N/A</code></pre>

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "POST api/countries";
+}
+<h2>POST api/countries</h2>
+<p>Inserts new country into database.</p>
+<h3>Resource URL</h3>
+<code>http://MYURL/api/countries</code>
+<h3>Resource Information</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Response formats
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                JSON
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Requires authentication?
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                NO
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Parameters</h3>
+<ul class="list-block node">
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                name <span class="text--italic">[Required]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The text of the continent name.
+                Example values: Sheldonopolis
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+    <li class="node__item">
+        <div class="grid">
+            <div class="grid__item one-third">
+                Capital <span class="text--italic">[Required]</span>
+            </div><!-- .grid__item --><!--
+            --><div class="grid__item two-thirds">
+                The text of the continent capital name.
+                Example values: Sheldonopolis City
+            </div><!-- .grid__item -->
+        </div><!-- .grid -->
+    </li><!-- .node__item -->
+</ul>
+<h3>Example Request</h3>
+<code>POST http://MYURL/api/continents</code>
+<p>Body:</p>
+<pre><code class="language-javascript">{
+   "Name": "Sheldonopolis",
+   "Capital": "Sheldonopolis City"
+}</code></pre>
+<h3>Example Result</h3>
+<pre><code class="language-javascript">N/A</code></pre>
