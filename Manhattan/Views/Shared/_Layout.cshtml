@@ -18,34 +18,94 @@
          --><div class="grid__item one-quarter">
                 <ul class="list-block menu">
                     <li class="menu__item">
-                        <a href="#" class="menu__link">GET api/continents</a>
+                        @Html.ActionLink(
+                            "GET api/continents",
+                            "GetContinents",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">GET api/continents/:id</a>
+                        @Html.ActionLink(
+                            "GET api/continents/:id",
+                            "GetContinentsID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">POST api/continents</a>
+                        @Html.ActionLink(
+                            "POST api/continents",
+                            "PostContinents",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">PUT api/continents/:id</a>
+                        @Html.ActionLink(
+                            "PUT api/continents/:id",
+                            "PutContinentsID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">DELETE api/continents/:id</a>
+                        @Html.ActionLink(
+                            "DELETE api/continents/:id",
+                            "DeleteContinentsID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">GET api/countries</a>
+                        @Html.ActionLink(
+                            "GET api/countries",
+                            "GetCountries",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">GET api/countries/:id</a>
+                        @Html.ActionLink(
+                            "GET api/countries/:id",
+                            "GetCountriesID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">POST api/countries</a>
+                        @Html.ActionLink(
+                            "POST api/countries",
+                            "PostCountries",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">PUT api/countries/:id</a>
+                        @Html.ActionLink(
+                            "PUT api/countries/:id",
+                            "PutCountriesID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">DELETE api/countries/:id</a>
+                        @Html.ActionLink(
+                            "DELETE api/countries/:id",
+                            "DeleteCountriesID",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
                     </li>
                 </ul><!-- .menu -->
             </div><!-- .grid__item -->
