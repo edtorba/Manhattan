@@ -127,6 +127,7 @@
     <Content Include="Views\Home\GetCountries.cshtml" />
     <Content Include="Views\Home\GetCountriesID.cshtml" />
     <Content Include="Views\Home\PostCountries.cshtml" />
+    <Content Include="Views\Home\PutCountriesID.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
