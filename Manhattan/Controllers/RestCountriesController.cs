@@ -16,7 +16,7 @@ namespace Manhattan.Controllers
             return await RunAsync(id);
         }
 
-        static async Task<object> RunAsync(string country)
+        public async Task<object> RunAsync(string country)
         {
             using (var client = new HttpClient())
             {
@@ -32,7 +32,7 @@ namespace Manhattan.Controllers
                 }
                 else
                 {
-                    return null;
+                    return this.BadRequest();
                 }
             }
         }
