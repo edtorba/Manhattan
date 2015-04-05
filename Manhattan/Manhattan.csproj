@@ -104,6 +104,7 @@
     <Compile Include="Controllers\ContinentsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RestCountriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -129,6 +130,7 @@
     <Content Include="Views\Home\PostCountries.cshtml" />
     <Content Include="Views\Home\PutCountriesID.cshtml" />
     <Content Include="Views\Home\DeleteCountriesID.cshtml" />
+    <Content Include="Views\Home\RestCountries.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

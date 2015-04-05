@@ -107,6 +107,15 @@
                             new { @class = "menu_link" }
                         )
                     </li>
+                    <li class="menu__item">
+                        @Html.ActionLink(
+                            "GET api/restcountries/:string",
+                            "RestCountries",
+                            "Home",
+                            null,
+                            new { @class = "menu_link" }
+                        )
+                    </li>
                 </ul><!-- .menu -->
             </div><!-- .grid__item -->
         </div><!-- .grid -->

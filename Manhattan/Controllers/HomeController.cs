@@ -73,5 +73,11 @@ namespace Manhattan.Controllers
         {
             return View();
         }
+
+        // GET: RestCountries
+        public ActionResult RestCountries()
+        {
+            return View();
+        }
     }
 }
