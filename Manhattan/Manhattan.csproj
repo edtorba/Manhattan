@@ -93,7 +93,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\syntaxhighlighter.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
