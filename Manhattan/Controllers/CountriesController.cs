@@ -1,4 +1,5 @@
-﻿using Manhattan.Models;
+﻿using Manhattan.Filters;
+using Manhattan.Models;
 using Manhattan.Repository;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace Manhattan.Controllers
         }
 
         // POST api/countries
+        [BasicAuthentication]
         public Object Post([FromBody]Country country)
         {
             if (country != null)
@@ -56,6 +58,7 @@ namespace Manhattan.Controllers
         }
 
         // PUT api/countries/ID
+        [BasicAuthentication]
         public object Put(int id, [FromBody]Country country)
         {
             if (country != null)
@@ -76,6 +79,7 @@ namespace Manhattan.Controllers
         }
 
         // DELETE api/countries/ID
+        [BasicAuthentication]
         public object Delete(int id)
         {
             if (Countries.deleteCountry(id))

@@ -1,4 +1,5 @@
-﻿using Manhattan.Models;
+﻿using Manhattan.Filters;
+using Manhattan.Models;
 using Manhattan.Repository;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace Manhattan.Controllers
         }
 
         // POST api/continents
+        [BasicAuthentication]
         public object Post([FromBody]Continent continent)
         {
             if (continent != null)
@@ -55,6 +57,7 @@ namespace Manhattan.Controllers
         }
 
         // PUT api/continents/ID
+        [BasicAuthentication]
         public object Put(int id, [FromBody]Continent continent)
         {
             if (continent != null)
@@ -75,6 +78,7 @@ namespace Manhattan.Controllers
         }
 
         // DELETE api/continents/ID
+        [BasicAuthentication]
         public object Delete(int id)
         {
             if (Continents.deleteContinent(id))
