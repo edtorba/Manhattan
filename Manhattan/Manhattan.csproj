@@ -136,6 +136,7 @@
     <Content Include="Views\Home\PutCountriesID.cshtml" />
     <Content Include="Views\Home\DeleteCountriesID.cshtml" />
     <Content Include="Views\Home\RestCountries.cshtml" />
+    <None Include="Properties\PublishProfiles\Manhattan.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
