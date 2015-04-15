@@ -20,7 +20,7 @@ namespace Manhattan
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "1.0/api/{controller}/{id}",
+                routeTemplate: "api/1.0/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
