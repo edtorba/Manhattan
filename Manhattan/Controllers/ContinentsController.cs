@@ -15,13 +15,13 @@ namespace Manhattan.Controllers
      */
     public class ContinentsController : ApiController
     {
-        // GET api/continents
+        // GET continents
         public IEnumerable<Continent> Get()
         {
             return Continents.getContinents();
         }
 
-        // GET api/continents/ID
+        // GET continents/ID
         public Object Get(int id)
         {
             Object result = Continents.getContinent(id);
@@ -35,7 +35,7 @@ namespace Manhattan.Controllers
             }
         }
 
-        // POST api/continents
+        // POST continents
         [BasicAuthentication]
         public object Post([FromBody]Continent continent)
         {
@@ -56,7 +56,7 @@ namespace Manhattan.Controllers
             }
         }
 
-        // PUT api/continents/ID
+        // PUT continents/ID
         [BasicAuthentication]
         public object Put(int id, [FromBody]Continent continent)
         {
@@ -77,7 +77,7 @@ namespace Manhattan.Controllers
             }
         }
 
-        // DELETE api/continents/ID
+        // DELETE continents/ID
         [BasicAuthentication]
         public object Delete(int id)
         {
