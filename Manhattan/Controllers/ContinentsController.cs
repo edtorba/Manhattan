@@ -16,12 +16,14 @@ namespace Manhattan.Controllers
     public class ContinentsController : ApiController
     {
         // GET continents
+        [Route("1.0/continents", Name = "GetContinents")]
         public IEnumerable<Continent> Get()
         {
             return Continents.getContinents();
         }
 
         // GET continents/ID
+        [Route("1.0/continents/{id}", Name = "GetContinent")]
         public Object Get(int id)
         {
             Object result = Continents.getContinent(id);
@@ -37,6 +39,7 @@ namespace Manhattan.Controllers
 
         // POST continents
         [BasicAuthentication]
+        [Route("1.0/continents", Name = "PostContinent")]
         public object Post([FromBody]Continent continent)
         {
             if (continent != null)
@@ -58,6 +61,7 @@ namespace Manhattan.Controllers
 
         // PUT continents/ID
         [BasicAuthentication]
+        [Route("1.0/continents/{id}", Name = "PutContinent")]
         public object Put(int id, [FromBody]Continent continent)
         {
             if (continent != null)
@@ -79,6 +83,7 @@ namespace Manhattan.Controllers
 
         // DELETE continents/ID
         [BasicAuthentication]
+        [Route("1.0/continents/{id}", Name = "DeleteContinent")]
         public object Delete(int id)
         {
             if (Continents.deleteContinent(id))

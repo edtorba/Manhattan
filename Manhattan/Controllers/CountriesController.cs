@@ -17,12 +17,14 @@ namespace Manhattan.Controllers
     public class CountriesController : ApiController
     {
         // GET countries
+        [Route("1.0/countries", Name = "GetCountries")]
         public IEnumerable<Country> Get()
         {
             return Countries.getCountries();
         }
 
         // GET countries/ID
+        [Route("1.0/countries/{id}", Name = "GetCountry")]
         public Object Get(int id)
         {
             Object result = Countries.getCountry(id);
@@ -38,6 +40,7 @@ namespace Manhattan.Controllers
 
         // POST countries
         [BasicAuthentication]
+        [Route("1.0/countries", Name = "PostCountry")]
         public Object Post([FromBody]Country country)
         {
             if (country != null)
@@ -59,6 +62,7 @@ namespace Manhattan.Controllers
 
         // PUT countries/ID
         [BasicAuthentication]
+        [Route("1.0/countries/{id}", Name = "PutCountry")]
         public object Put(int id, [FromBody]Country country)
         {
             if (country != null)
@@ -80,6 +84,7 @@ namespace Manhattan.Controllers
 
         // DELETE countries/ID
         [BasicAuthentication]
+        [Route("1.0/countries/{id}", Name = "DeleteCountry")]
         public object Delete(int id)
         {
             if (Countries.deleteCountry(id))

@@ -12,6 +12,7 @@ namespace Manhattan.Controllers
     public class RestCountriesController : ApiController
     {
         // GET restcountries/STRING
+        [Route("1.0/restcountries/{id}", Name = "GetRestCountry")]
         public async Task<object> Get(string id)
         {
             return await RunAsync(id);
